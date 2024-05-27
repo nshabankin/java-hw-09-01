@@ -1,7 +1,21 @@
 package ru.netology.javaqa.javaqamvn;
 
 public class Radio {
+    private int numberOfStations = 10; // поле количества радиостанций, по умолчанию 10
     private int currentStation; // поле текущей радиостанции с приватным доступом
+    private int currentVolume; // поле текущей громкости с приватным доступом
+
+    public Radio() { // конструктор класса без параметров
+
+    }
+
+    public Radio(int numberOfStations) { // конструктор класса с возможностью ввода количества радиостанций
+        this.numberOfStations = numberOfStations; // новое количество радиостанций
+    }
+
+    public int getNumberOfStations() { // getter количества радиостанций
+        return numberOfStations;
+    }
 
     public int getCurrentStation() { // getter текущей радиостанции
         return currentStation;
@@ -11,14 +25,14 @@ public class Radio {
         if (newCurrentStation < 0) {
             return; // early exit method, если значение меньше минимального
         }
-        if (newCurrentStation > 9) {
+        if (newCurrentStation > numberOfStations - 1) { // максимальный номер станции
             return; // early exit method, если значение больше максимального
         }
         currentStation = newCurrentStation; // в ином случае приписываем новое значение
     }
 
     public void next() { // метод выбора следующей радиостанции
-        if (currentStation < 9) { // если текущая радиостанция не 9,
+        if (currentStation < numberOfStations - 1) { // если текущая радиостанция не последняя,
             currentStation = currentStation + 1; // то прибавляем 1
         } else {
             currentStation = 0; // иначе переходим на 0
@@ -29,11 +43,9 @@ public class Radio {
         if (currentStation > 0) { // если текущая радиостанция не 0,
             currentStation = currentStation - 1; // то вычитаем 1
         } else {
-            currentStation = 9; // иначе переходим на 9
+            currentStation = numberOfStations - 1; // иначе переходим на последнюю
         }
     }
-
-    private int currentVolume; // поле текущей громкости с приватным доступом
 
     public int getCurrentVolume() { // getter текущей громкости
         return currentVolume;
