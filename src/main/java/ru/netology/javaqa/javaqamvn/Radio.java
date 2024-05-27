@@ -1,34 +1,39 @@
 package ru.netology.javaqa.javaqamvn;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Radio {
     private int numberOfStations = 10; // поле количества радиостанций, по умолчанию 10
-    private int currentStation; // поле текущей радиостанции с приватным доступом
-    private int currentVolume; // поле текущей громкости с приватным доступом
-
-    public Radio() { // конструктор класса без параметров
-
-    }
-
-    public Radio(int numberOfStations) { // конструктор класса с возможностью ввода количества радиостанций
-        this.numberOfStations = numberOfStations; // новое количество радиостанций
-    }
-
-    public int getNumberOfStations() { // getter количества радиостанций
-        return numberOfStations;
-    }
-
-    public int getCurrentStation() { // getter текущей радиостанции
-        return currentStation;
-    }
+    private int currentStation = 0; // поле текущей радиостанции с приватным доступом
+    private int currentVolume = 0; // поле текущей громкости с приватным доступом
 
     public void setCurrentStation(int newCurrentStation) { // setter ручного ввода радиостанции
         if (newCurrentStation < 0) {
             return; // early exit method, если значение меньше минимального
         }
+
         if (newCurrentStation > numberOfStations - 1) { // максимальный номер станции
             return; // early exit method, если значение больше максимального
         }
         currentStation = newCurrentStation; // в ином случае приписываем новое значение
+    }
+
+    public void setCurrentVolume(int newCurrentVolume) { // setter ручного ввода громкости
+        if (newCurrentVolume < 0) {
+            return; // при вводе значения меньше минимального, оставляем минимальное
+        }
+
+        if (newCurrentVolume > 100) {
+            currentVolume = 100; // при вводе значения выше максимального, оставляем максимальное
+        } else {
+            currentVolume = newCurrentVolume; // в ином случае приписываем новое значение
+        }
+
     }
 
     public void next() { // метод выбора следующей радиостанции
@@ -47,30 +52,13 @@ public class Radio {
         }
     }
 
-    public int getCurrentVolume() { // getter текущей громкости
-        return currentVolume;
-    }
-
-    public void setCurrentVolume(int newCurrentVolume) { // setter ручного ввода громкости
-        if (newCurrentVolume < 0) {
-            return; // при вводе значения меньше минимального, оставляем минимальное
-        }
-
-        if (newCurrentVolume > 100) {
-            currentVolume = 100; // при вводе значения выше максимального, оставляем максимальное
-        } else {
-            currentVolume = newCurrentVolume; // в ином случае приписываем новое значение
-        }
-
-    }
-
-    public void increaseVolume() {
+    public void increaseVolume() { // метод увеличения громкости на 1
         if (currentVolume < 100) { // если текущая громкость не 100,
             currentVolume = currentVolume + 1; // то прибавляем 1
         }
     }
 
-    public void decreaseVolume() {
+    public void decreaseVolume() { // метод уменьшения громкости на 1
         if (currentVolume > 0) { // если текущая громкость не 0,
             currentVolume = currentVolume - 1; // то вычитаем 1
         }
