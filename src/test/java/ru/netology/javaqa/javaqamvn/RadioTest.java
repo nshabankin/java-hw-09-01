@@ -1,15 +1,16 @@
 package ru.netology.javaqa.javaqamvn;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RadioTest {
 
+    // предзаданный объект класса с новым количеством радиостанций
+    Radio radio = new Radio(21);
+
     @Test
     public void shouldSetStation() { // должен устанавливать номер радиостанции
-
-        // объект класса
-        Radio radio = new Radio();
 
         // тестовое действие
         radio.setCurrentStation(5);
@@ -21,17 +22,14 @@ public class RadioTest {
         int actual = radio.getCurrentStation();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldNotSetStationAboveMax() { // не должен устанавливать номер радиостанцию выше максимума
 
-        // объект класса
-        Radio radio = new Radio();
-
         // тестовое действие
-        radio.setCurrentStation(10);
+        radio.setCurrentStation(22);
 
         // ожидаемый результат
         int expected = 0;
@@ -40,14 +38,11 @@ public class RadioTest {
         int actual = radio.getCurrentStation();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldNotSetStationBelowMin() { // не должен устанавливать номер радиостанцию ниже минимума
-
-        // объект класса
-        Radio radio = new Radio();
 
         // тестовое действие
         radio.setCurrentStation(-1);
@@ -59,14 +54,11 @@ public class RadioTest {
         int actual = radio.getCurrentStation();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetNextStation() { // должен переключать радиостанцию на следующую
-
-        // объект класса
-        Radio radio = new Radio();
 
         // подготовительное действие
         radio.setCurrentStation(5);
@@ -81,17 +73,14 @@ public class RadioTest {
         int actual = radio.getCurrentStation();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetNextStationToZeroWhenMax() { // должен переключать на первую радиостанцию после последней
 
-        // объект класса
-        Radio radio = new Radio();
-
         // подготовительное действие
-        radio.setCurrentStation(9);
+        radio.setCurrentStation(radio.getNumberOfStations() - 1);
 
         // тестовое действие
         radio.next();
@@ -103,14 +92,11 @@ public class RadioTest {
         int actual = radio.getCurrentStation();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetPrevStation() { // должен переключать радиостанцию на предыдущую
-
-        // объект класса
-        Radio radio = new Radio();
 
         // подготовительное действие
         radio.setCurrentStation(5);
@@ -125,14 +111,11 @@ public class RadioTest {
         int actual = radio.getCurrentStation();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetPrevStationToNineWhenMin() { // должен переключать на последнюю радиостанцию перед первой
-
-        // объект класса
-        Radio radio = new Radio();
 
         // подготовительное действие
         radio.setCurrentStation(0);
@@ -141,20 +124,17 @@ public class RadioTest {
         radio.prev();
 
         // ожидаемый результат
-        int expected = 9;
+        int expected = radio.getNumberOfStations() - 1;
 
         // фактический результат
         int actual = radio.getCurrentStation();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetCurrentVolume() { // должен устанавливать текущую громкость
-
-        // объект класса
-        Radio radio = new Radio();
 
         // тестовое действие
         radio.setCurrentVolume(50);
@@ -166,14 +146,11 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetZeroVolume() { // должен устанавливать громкость на 0 вручную
-
-        // объект класса
-        Radio radio = new Radio();
 
         // тестовое действие
         radio.setCurrentVolume(0);
@@ -185,14 +162,11 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldNotSetVolumeAboveMax() { // не должен устанавливать громкость выше максимума
-
-        // объект класса
-        Radio radio = new Radio();
 
         // тестовое действие
         radio.setCurrentVolume(101);
@@ -204,14 +178,11 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldNotSetVolumeBelowMin() { // не должен устанавливать громкость ниже минимума
-
-        // объект класса
-        Radio radio = new Radio();
 
         // тестовое действие
         radio.setCurrentVolume(-1);
@@ -223,14 +194,11 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldIncreaseVolume() {
-
-        // объект класса
-        Radio radio = new Radio();
+    public void shouldIncreaseVolume() { // должен увеличивать громкость на 1
 
         // подготовительное действие
         radio.setCurrentVolume(50);
@@ -245,14 +213,11 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldDecreaseVolume() {
-
-        // объект класса
-        Radio radio = new Radio();
+    public void shouldDecreaseVolume() { // должен уменьшать громкость на 1
 
         // подготовительное действие
         radio.setCurrentVolume(50);
@@ -267,14 +232,11 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldNotIncreaseVolumeWhenMax() {
-
-        // объект класса
-        Radio radio = new Radio();
+    public void shouldNotIncreaseVolumeWhenMax() { // громкость не должна превышать максимальную при увеличении
 
         // подготовительное действие
         radio.setCurrentVolume(100);
@@ -289,14 +251,11 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldNotDecreaseVolumeWhenMin() {
-
-        // объект класса
-        Radio radio = new Radio();
+    public void shouldNotDecreaseVolumeWhenMin() { // громкость не должна превышать минимальную при уменьшении
 
         // подготовительное действие
         radio.setCurrentVolume(0);
@@ -311,6 +270,6 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
 
         // проверка ожидаемого и фактического результата
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }
